@@ -1,0 +1,6 @@
+src/*/*/bin/*
+src/*/*/obj/*
+src/*/*.suo
+src/*/*/*.suo
+src/*/*/csx/*/roles/*/approot/bin/*.dll
+
