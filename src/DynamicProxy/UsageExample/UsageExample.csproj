@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Cookie.cs" />
     <Compile Include="CookieService.cs" />
+    <Compile Include="FaultyMethods.cs" />
     <Compile Include="ICookieService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SnackController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DynamicProxy\DynamicProxy.csproj">

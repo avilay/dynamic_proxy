@@ -8,24 +8,21 @@ namespace UsageExample
 {
     class Program
     {
-        public void DistributeAllChanged() {
-            Console.WriteLine("Nothing to distribute! Move on!");
-        }
-
+        // This is the SnackController unit test
         static void Main(string[] args) {
+            // Create the proxy cookie service that wraps the real CookieService
             CookieService svc = new CookieService();
             ProxyFactory<ICookieService> pf = new ProxyFactory<ICookieService>(false);
             ICookieService proxy = pf.Create(svc);
 
-            Cookie[] cookies = proxy.Bake();
-            foreach (Cookie cookie in cookies) {
-                Console.WriteLine("Baked cookie " + cookie.Name());
-            }
-            proxy.DistributeAll();
+            // Construct SnackController with the proxy cookie service
+            SnackController ctrlr = new SnackController(proxy);
+            ctrlr.PrepareSnacks(); // All calls are routed to the real CookieService
 
-            Program p = new Program();
-            ProxyFactory<ICookieService>.ChangeBehavior(proxy, "DistributeAll", p, "DistributeAllChanged");
-            proxy.DistributeAll();
+            // Now inject a fault in CookieService.DistributeAll
+            ProxyFactory<ICookieService>.ChangeBehavior(proxy, "DistributeAll", 
+                new FaultyMethods(), "DistributeAllChanged");
+            ctrlr.PrepareSnacks(); // Calls to CookieService.DistributeAll are routed to FaultyMethods.DistributeAllChanged
         }
     }
 }

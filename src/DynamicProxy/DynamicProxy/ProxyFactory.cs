@@ -49,10 +49,7 @@ namespace DynamicProxy
     ///         proxy.DistributeAll(); --> goes to MyDistributeAll()                        
     ///     }
     /// }
-    /// </example>
-    /// <remarks>
-    /// See the UsageExample project to see a working example based on the example expained in the examples section.
-    /// </remarks>
+    /// </example>    
     /// <typeparam name="T">The interface to be proxied</typeparam>
     public class ProxyFactory<T>
     {
